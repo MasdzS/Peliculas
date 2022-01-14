@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "413261643426",
+    "project_id": "peliculas-d309b",
+    "storage_bucket": "peliculas-d309b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413261643426:android:d25ebb1415eff4f52da1fb",
+        "android_client_info": {
+          "package_name": "com.mario.reclutamiento"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413261643426-0u8k8dqsudg695goni3ljgnosu6ov879.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW5iM4rC5SXhoITnc_frySVufjXrOjTwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413261643426-0u8k8dqsudg695goni3ljgnosu6ov879.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

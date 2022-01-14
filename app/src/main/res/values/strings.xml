@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Movies">Movies</string>
+    <string name="details">Details</string>
+    <string name="popularity_field">Popularity: %s</string>
+    <string name="rate_field">Rate: %s</string>
+    <string name="err">An error has happend</string>
+    <string name="release_date_field">Release date: %s</string>
+    <string name="original_language_field">Original language: %s</string>
+    <string name="pagination_field">%1$s of %2$s</string>
+    <string name="directions">Directions</string>
+    <string name="updatingLocation">Updating location</string>
+    <string name="permision_denied">permission denied</string>
+    <string name="location_permision_denied">Permision for location denied</string>
+    <string name="location">Location</string>
+    <string name="location_permission">Location permission</string>
+    <string name="location_permission_details">We need location permission for store location correctly</string>
+    <string name="my_directions">My directions</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

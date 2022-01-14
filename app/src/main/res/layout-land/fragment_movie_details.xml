@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ui.movieDetails.MovieDetailsFragment">
+
+
+    <ImageView
+        android:id="@+id/iv_movie_image"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_movie_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/title_style"
+                tools:text="Spiderman No way home"/>
+
+            <TextView
+                android:id="@+id/tv_movie_original_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/subtitle_style"
+                tools:text="Spiderman "/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_small"/>
+            <TextView
+                android:id="@+id/tv_movie_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Una pelicula muy taquillera"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_small"/>
+            
+            <TextView
+                android:id="@+id/tv_movie_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Estreno: 20/12/2021"/>
+
+            <TextView
+                android:id="@+id/tv_movie_original_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Lenguaje original: en" />
+
+            <TextView
+                android:id="@+id/tv_movie_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Puntuación: 8.5" />
+
+            <TextView
+                android:id="@+id/tv_movie_popularity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Popularity: 8464.5" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

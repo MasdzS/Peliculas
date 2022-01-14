@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peliculas</string>
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="Movies">Peliculas</string>
+    <string name="details">Detalles</string>
+    <string name="popularity_field">Popularidad: %s</string>
+    <string name="rate_field">Calificación: %s</string>
+    <string name="err">Ha ocurrido un error</string>
+    <string name="release_date_field">Fecha de lanzamiento: %s</string>
+    <string name="updatingLocation">Actualizando ubicación</string>
+    <string name="permision_denied">Permiso denegado</string>
+    <string name="location_permission_details">Necesitamos el permiso de ubicación para almacenar la ubicación correctamente</string>
+    <string name="original_language_field">Lenguaje original: %s</string>
+    <string name="pagination_field">%1$s de %2$s</string>
+    <string name="directions">Direcciones</string>
+    <string name="location_permision_denied">Permiso de ubicación denegado</string>
+    <string name="location">Ubicación</string>
+    <string name="location_permission">Permiso de ubicación</string>
+    <string name="my_directions">Mis direcciones</string>
+    <string name="title_activity_maps">Mapa</string>
+</resources>
