@@ -39,7 +39,7 @@ class LocationService : LifecycleService() {
     override fun onCreate() {
         super.onCreate()
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
+        //Se genera un canal de notificaciones si la aplicación esta corriendo sobre android 8 o superior
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             val name = getString(R.string.app_name)
             val nChannel = NotificationChannel(CHANNEL_ID,name,NotificationManager.IMPORTANCE_LOW)
@@ -52,6 +52,11 @@ class LocationService : LifecycleService() {
         supervisorJob.cancel()
     }
 
+    /**
+     * Obtiene la ubicación del usuario a partir del LocationRepository y lo almacena en
+     * firestore
+     *
+     */
     fun getLocation() = serviceScope.launch(Dispatchers.IO) {
         locationRepository.getUserLocation().collect{
             Log.d(TAG, "getLocation: "+it.latitude+","+it.longitude)
@@ -60,7 +65,11 @@ class LocationService : LifecycleService() {
     }
 
 
-
+    /**
+     * Se encarga de crear una notificación para mostrar que el servicío esta corriendo
+     * en segundo plano
+     * @return Una Notificacion
+     */
     fun getNotificacion():Notification{
         val intent = Intent(this,LocationService::class.java)
         intent.putExtra(EXTRA_STARTED_FROM_NOTIFICATION,true)
@@ -86,6 +95,11 @@ class LocationService : LifecycleService() {
         return notification
     }
 
+    /**
+     * Se invoca cuando el Activity se une con el servicio y proporciona una instancia del servicio
+     * al activity, ademas de iniciar las actualizaciones de la ubicación
+     * @return Un Binder que facilíta la entrega de la instancia del servicio
+     */
     override fun onBind(intent: Intent): IBinder {
         super.onBind(intent)
         startForeground(NOTIFICATION_ID,getNotificacion())
@@ -93,6 +107,10 @@ class LocationService : LifecycleService() {
         return binder
     }
 
+    /**
+     * Provee una instancia del servicío para el Activity
+     * @return Un Binder que facilíta la entrega de la instancia del servicio
+     */
     inner class LocalBinder:Binder(){
         fun getService(): LocationService {
             return this@LocationService

@@ -7,7 +7,9 @@ import java.lang.Exception
 
 abstract class BaseApiResponse {
 
-    //Controla el estado de las peticiones
+    /**
+     * Realiza las peticiones a la Api, maneja los errores y reporta el estado de las peticiones
+     */
     fun <T> safeApiCall(apiCall:suspend () -> Response<T>): Flow<NetworkResult<T>> {
         return flow {
             emit(NetworkResult.Loading<T>() as NetworkResult<T>)

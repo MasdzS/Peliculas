@@ -22,6 +22,9 @@ import javax.inject.Inject
 
 const val TAG = "MoviesListFragment"
 
+/**
+ * Muestra una lista de peliculas
+ */
 @AndroidEntryPoint
 class MoviesListFragment : Fragment() {
 
@@ -40,10 +43,10 @@ class MoviesListFragment : Fragment() {
         return vBind.root
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
+    /**
+     * Configura la comunicación con el viewModel permitiendo obtener las listas de las peliculas
+     * y responder a los estados de las peticiones
+     */
     private fun initUpdates(){
         viewModel.getMovies()
         viewModel.updateMoviesByApi()
@@ -65,6 +68,9 @@ class MoviesListFragment : Fragment() {
         }
     }
 
+    /**
+     * Configura el recycler view que muestra la lista de películas
+     */
     private fun initRv(){
         vBind.rvMovies.adapter = moviesAdapter
         moviesAdapter.onItemClick = { movie ->
@@ -73,6 +79,10 @@ class MoviesListFragment : Fragment() {
         }
     }
 
+    /**
+     * Configura el spinner que permite cambiar entre las peliculas populares, mejor calificadas
+     * o mas proximas a salir
+     */
     private fun initSpinner(){
         vBind.spListType.onItemSelectedListener = object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(adapter: AdapterView<*>?, view: View?, selection: Int, viewId: Long) {
@@ -89,6 +99,9 @@ class MoviesListFragment : Fragment() {
         }
     }
 
+    /**
+     * Configura el panel de paginación que permite navegar entre las paginas de las listas
+     */
     private fun setupPagination(movieList:MovieList, isLoading:Boolean){
         val isLastPage = viewModel.page>=movieList.totalPages?:0
         val isFirstPage = viewModel.page == 1

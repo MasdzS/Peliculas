@@ -16,11 +16,14 @@ import com.mario.domain.models.MoviesListRef
 @TypeConverters(DBTypeConverters::class)
 abstract class AppDB: RoomDatabase() {
 
-    abstract fun movieDao():MovieDao
 
+    abstract fun movieDao():MovieDao
     abstract fun movieListDao():MovieListDao
 
     companion object{
+        /**
+         * Genera una instancia nueva de Room
+         */
         @JvmStatic
         fun newInstance(context:Context): AppDB {
             return Room.databaseBuilder(context,AppDB::class.java,"AppDB")

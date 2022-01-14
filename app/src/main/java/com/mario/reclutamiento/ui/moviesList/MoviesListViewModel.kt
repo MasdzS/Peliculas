@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import mx.com.satoritech.web.NetworkResult
 import javax.inject.Inject
 
+
 @HiltViewModel
 class MoviesListViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository
@@ -25,15 +26,21 @@ class MoviesListViewModel @Inject constructor(
     var page:Int = 1
     var type:Int = 1
 
-    fun getMovies() = viewModelScope.launch(){
+    /**
+     * Obtiene las peliculas almacenadas desde el repositorio
+     */
+    fun getMovies() = viewModelScope.launch(Dispatchers.IO){
         moviesRepository.getList(type, page).collect{
-            _movies.value = it
+            _movies.postValue(it)
         }
     }
 
-    fun updateMoviesByApi() = viewModelScope.launch(){
+    /**
+     * Actualiza las películas almacenadas en la base de datos consultando a la API
+     */
+    fun updateMoviesByApi() = viewModelScope.launch(Dispatchers.IO){
         moviesRepository.updateListbyApi(type, page).collect{
-            _onUpdateMovies.value = it
+            _onUpdateMovies.postValue(it)
         }
     }
 }

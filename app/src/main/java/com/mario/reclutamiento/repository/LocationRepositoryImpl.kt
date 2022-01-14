@@ -16,6 +16,10 @@ import javax.inject.Inject
 
 private const val TAG = "LocationRepositoryImp"
 
+/**
+ * Se encarga de consultar a firestore y la api de servicios de google para obtener y almacenar
+ * la ubicación del usuario
+ */
 class LocationRepositoryImpl @Inject constructor(
     @ApplicationContext val context: Context
 ) : LocationRepository {
@@ -23,10 +27,19 @@ class LocationRepositoryImpl @Inject constructor(
     val locationManager = LocationManager(context)
     val firestore = Firebase.firestore
 
+    /**
+     * Obtiene la ubicación del usuario mediante los servicios de google
+     * @return Un flujo mediante el cual se recibira la ubicación del usuario
+     */
     override fun getUserLocation(): Flow<LocationPoint> {
         return locationManager.startUpdates()
     }
 
+    /**
+     * Obtiene las ubicaciones del usuario almacenadas en firestore
+     * @return Un flujo mediante el cual se obtienen las ubicaciones asi como el
+     * estado de la petición
+     */
     suspend override fun getUserLocations(): Flow<NetworkResult<List<LocationPoint>>> {
         val locationPoints = MutableLiveData<NetworkResult<List<LocationPoint>>>()
         val points = mutableListOf<LocationPoint>()
@@ -52,6 +65,10 @@ class LocationRepositoryImpl @Inject constructor(
         return locationPoints.asFlow()
     }
 
+    /**
+     * Almacena la ubicacion del usuario en firebase
+     * @param locationPoint objeto que contiene la longitud y latitud de la ubicación
+     */
     suspend override fun saveUserLocation(locationPoint: LocationPoint){
         val userId  = Firebase.analytics.firebaseInstanceId
         val location = hashMapOf(

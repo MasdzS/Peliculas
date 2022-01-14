@@ -20,6 +20,10 @@ import com.mario.reclutamiento.databinding.FragmentDirectionsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import mx.com.satoritech.web.NetworkResult
 
+
+/**
+ * Muestra el mapa con las direcciones almacenadas del usuario
+ */
 @AndroidEntryPoint
 class DirectionsFragment : Fragment(), OnMapReadyCallback {
 
@@ -37,11 +41,18 @@ class DirectionsFragment : Fragment(), OnMapReadyCallback {
         return vBind.root
     }
 
+    /**
+     * Se invoca cuando el mapa esta preparado para realizar cambios
+     */
     override fun onMapReady(map: GoogleMap) {
         gMap = map
         initUpdates()
     }
 
+    /**
+     * Configura la comunicación con el viewModel mediante la cual se obtienen las direcciones y se
+     * responde al estado de la solicitud
+     */
     private fun initUpdates(){
         viewModel.getLocations()
         viewModel.locations.observe(viewLifecycleOwner){
@@ -57,6 +68,10 @@ class DirectionsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Pinta marcadores en el mapa representando las ubicaciones almacenadas del usuario
+     * @param points puntos con las cordenadas de los marcadores a pintar
+     */
     private fun showMarkers(points:List<LocationPoint>){
         var position: LatLng? = null
         gMap.clear()

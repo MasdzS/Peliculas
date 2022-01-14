@@ -19,6 +19,10 @@ class MovieDetailsViewModel @Inject constructor(
 
     val movie:LiveData<Movie> = _movie
 
+    /**
+     * Obtiene los datos de la pelicula desde el repositorio
+     * @param movieId Id de la pelicula
+     */
     fun getMovie(movieId:Long) = viewModelScope.launch(Dispatchers.IO){
         moviesRepository.getMovie(movieId).collect{
             _movie.postValue(it)

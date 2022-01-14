@@ -14,6 +14,9 @@ import com.mario.reclutamiento.databinding.ItemMovieBinding
 import mx.com.satoritech.web.APIConstants
 import javax.inject.Inject
 
+/**
+ * Adapta las películas a un formato que el recycler view puede interpretar
+ */
 class MoviesListAdapter: RecyclerView.Adapter<MoviesListAdapter.moviesViewHoder>() {
 
     var onItemClick:(Movie)->Unit = {}

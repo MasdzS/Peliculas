@@ -42,11 +42,17 @@ class MainActivity : AppCompatActivity() {
         getLocationPermission()
     }
 
+    /**
+     * Crea la opciones de la ActionBar
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
+    /**
+     * Configura las opciones del actionBar
+     */
     override fun onOptionsItemSelected(item: MenuItem):Boolean{
         return when(item.itemId){
             android.R.id.home -> {
@@ -62,6 +68,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el componente de navegación
+     */
     private fun setupNavigationComponent(){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
         navController = navHostFragment.navController
@@ -69,6 +78,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(this, navController, appBarConfiguration)
     }
 
+    /**
+     * Pregunta por los permisos de ubicación
+     */
     private fun getLocationPermission(){
         val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
             if(isGranted){
@@ -100,11 +112,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicia el servicío de ubicación
+     */
     private fun startService(){
         val intent = Intent(this, LocationService::class.java)
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
+    /**
+     * Recibe el Binder cuando se junta el servicio de ubicación y Activity
+     */
     private val serviceConnection: ServiceConnection = object : ServiceConnection {//Inicia comunicacion con proceso de ubicación
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             locationService = (service as LocationService.LocalBinder).getService()

@@ -20,6 +20,9 @@ import kotlin.coroutines.coroutineContext
 
 private const val TAG = "LocationManager"
 
+/**
+ * Obtiene la ubicación del usuario mediante los servicios de google
+ */
 class LocationManager(
     val context: Context
 ) {
@@ -28,6 +31,9 @@ class LocationManager(
     private val fusedLocationClient:FusedLocationProviderClient
     private val locationRequest:LocationRequest
 
+    /**
+     * Se configura la solicitud de la ubicación
+     */
     init {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         locationRequest = LocationRequest.create().apply {
@@ -44,6 +50,9 @@ class LocationManager(
         }
     }
 
+    /**
+     * Se inician las actualizaciones de la ubicación
+     */
     fun startUpdates():Flow<LocationPoint>{
         if(ActivityCompat.checkSelfPermission(
             context,
@@ -56,6 +65,9 @@ class LocationManager(
         return onLocationUpdate.asFlow()
     }
 
+    /**
+     * Configura los callbacks para obtener la ubicación
+     */
     private val locationCallBack = object:LocationCallback(){
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
@@ -70,8 +82,4 @@ class LocationManager(
         }
     }
 
-    data class LocationResponse(
-        val latitude:Double? = null,
-        val longitude:Double? = null
-    )
 }

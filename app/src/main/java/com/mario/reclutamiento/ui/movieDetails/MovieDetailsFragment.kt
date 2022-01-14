@@ -14,6 +14,10 @@ import com.mario.reclutamiento.databinding.FragmentMovieDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import mx.com.satoritech.web.APIConstants
 
+
+/**
+ * Muestra los detalles de la película seleccionada
+ */
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
 
@@ -32,10 +36,16 @@ class MovieDetailsFragment : Fragment() {
         return vBind.root
     }
 
+    /**
+     * Obtiene el id de la película enviado por la pantalla anterior
+     */
     private fun initData(){
         movieId = args.movieId
     }
 
+    /**
+     * Configura la comunicación con el viewModel permitiendo obtener los datos de la pelicula
+     */
     private fun initUpdates(){
         viewModel.getMovie(movieId)
         viewModel.movie.observe(viewLifecycleOwner){
@@ -43,6 +53,10 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
+    /**
+     * Muestra los datos de la película
+     * @param Datos de la película a mostrar
+     */
     private fun showMovie(movie:Movie){
         vBind.ivMovieImage.load(APIConstants.imageServerPath + movie.backdropPath){
             this.crossfade(true)

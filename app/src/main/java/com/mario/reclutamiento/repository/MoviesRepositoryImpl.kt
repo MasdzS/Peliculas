@@ -14,16 +14,30 @@ import mx.com.satoritech.web.BaseApiResponse
 import mx.com.satoritech.web.NetworkResult
 import javax.inject.Inject
 
+/**
+ * Consulta a la api y a la base de datos en Room para obtener información acerca de películas
+ */
 class MoviesRepositoryImpl @Inject constructor(
     val db: AppDB,
     val apiService: ApiService,
 ) : MoviesRepository, BaseApiResponse() {
+
+    /**
+     * Obtiene la lista de películas almacenadas en Room
+     * @param type Typo de lista (populares, mejor puntuados, proximamente)
+     * @param page Página de la lista a mostrar
+     **/
     override fun getList(type: Int, page: Int): Flow<ListWithMovies?> {
         return flow {
             this.emit(db.movieListDao().getList(type, page))
         }
     }
 
+    /**
+     * Obtiene la lista de películas de la API y actualiza las películas almacenadas en Room
+     * @param type Typo de lista (populares, mejor puntuados, proximamente)
+     * @param page Página de la lista a mostrar
+     **/
     override fun updateListbyApi(type: Int, page: Int): Flow<NetworkResult<MovieList>> {
         return safeApiCall{
             when(type){
@@ -60,6 +74,10 @@ class MoviesRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Obtiene una única película desde Room
+     * @param movieId id de la película
+     **/
     override fun getMovie(movieId: Long): Flow<Movie?> {
         return flow {
             emit(db.movieDao().getMovie(movieId))

@@ -21,6 +21,9 @@ class DirectionsViewModel @Inject constructor(
 
     val locations:LiveData<NetworkResult<List<LocationPoint>>> = _locations
 
+    /**
+     * Obtiene las ubicaciones guardadas del usuairo desde el repositorio
+     */
     fun getLocations() = viewModelScope.launch(Dispatchers.IO){
         locationRepository.getUserLocations().collect{
             _locations.postValue(it)

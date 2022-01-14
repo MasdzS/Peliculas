@@ -21,10 +21,16 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+/**
+ * Se encarga de crear y proveer una instancia de retrofit
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class RetrofitModule {
 
+    /**
+     * Provee una instancia de retrofit para todo el proyecto
+     */
     @Singleton
     @Provides
     fun provideRetrofit(): ApiService{
@@ -37,6 +43,10 @@ class RetrofitModule {
             .create(ApiService::class.java)
     }
 
+    /**
+     * Añade un logginInterceptor el cual se encarga de mostrar los datos obtenidos
+     * por retrofit en el log
+     */
     private fun loggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -44,6 +54,10 @@ class RetrofitModule {
 
     }
 
+    /**
+     * Genera una instancia de OkHttpClient el cual va actuar de cliente para las peticiones
+     * http
+     */
     private fun provideHttpClient(): OkHttpClient{
         return OkHttpClient
             .Builder()
@@ -60,6 +74,10 @@ class RetrofitModule {
             .build()
     }
 
+    /**
+     * Genera una instancia de Gson el cual se encarga de serializar y deserializar el contenido
+     * de las consultas a la api
+     */
     private fun gson(): Gson {
         return GsonBuilder()
             .registerTypeAdapter(Boolean::class.java, BooleanSerializer())
